@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>박준식 · AI 컨설턴트 &amp; 강사</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', sans-serif;
+      background: #f5f5f5;
+      color: #333;
+      min-height: 100vh;
+    }
+
+    /* ── 전체 레이아웃 ── */
+    .layout {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* ── 왼쪽 사이드바 ── */
+    .sidebar {
+      width: 33.333%;
+      min-width: 220px;
+      background: #1F3864;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 48px 20px 40px;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+    }
+
+    .profile-photo {
+      width: 140px;
+      height: 180px;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center top;
+      border: 3px solid rgba(255,255,255,0.8);
+      margin-bottom: 20px;
+      display: block;
+      background: #2e4f8a;
+    }
+
+    .profile-placeholder {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: #2e4f8a;
+      border: 3px solid rgba(255,255,255,0.8);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 36px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .sidebar-name {
+      font-size: 1.3rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-align: center;
+      margin-bottom: 6px;
+    }
+
+    .sidebar-position {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.75);
+      text-align: center;
+      line-height: 1.6;
+      margin-bottom: 28px;
+    }
+
+    .sidebar-divider {
+      width: 40px;
+      height: 1px;
+      background: rgba(255,255,255,0.25);
+      margin-bottom: 24px;
+    }
+
+    .sidebar-contact {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .contact-item {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .contact-label {
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: rgba(255,255,255,0.5);
+      text-transform: uppercase;
+    }
+
+    .contact-value {
+      font-size: 0.78rem;
+      color: #fff;
+      word-break: break-all;
+    }
+
+    .contact-value a {
+      color: #fff;
+      text-decoration: none;
+    }
+
+    .contact-value a:hover {
+      text-decoration: underline;
+    }
+
+    /* ── 오른쪽 본문 ── */
+    .content {
+      flex: 1;
+      max-width: 600px;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      padding: 32px 24px 16px;
+      overflow-y: auto;
+    }
+
+    section {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 16px 0;
+      margin: 0;
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    section:last-of-type {
+      border-bottom: none;
+    }
+
+    .section-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: #1F3864;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    /* ── 자기소개 ── */
+    .intro p {
+      font-size: 0.95rem;
+      line-height: 1.85;
+      color: #333;
+    }
+
+    /* ── 경력 카드 ── */
+    .career-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .career-card {
+      border-left: 3px solid #1F3864;
+      padding: 10px 14px;
+      background: #f9fafc;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .career-meta {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 4px;
+    }
+
+    .career-year {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #1F3864;
+      white-space: nowrap;
+    }
+
+    .career-company {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #333;
+    }
+
+    .career-title {
+      font-size: 0.82rem;
+      color: #555;
+    }
+
+    .career-summary {
+      font-size: 0.82rem;
+      color: #666;
+      line-height: 1.5;
+    }
+
+    /* ── 연락처 버튼 ── */
+    .contact-buttons {
+      display: flex;
+      flex-direction: row;
+      gap: 12px;
+    }
+
+    .btn {
+      display: block;
+      width: 100%;
+      padding: 14px 16px;
+      border: none;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+      letter-spacing: 0.04em;
+    }
+
+    .btn-email {
+      background: #1F3864;
+      color: #fff;
+    }
+
+    .btn-phone {
+      background: #fff;
+      color: #1F3864;
+      border: 2px solid #1F3864;
+    }
+
+    .btn-phone.copied {
+      background: #1F3864;
+      color: #fff;
+    }
+
+    /* ── 푸터 ── */
+    footer {
+      text-align: center;
+      font-size: 0.72rem;
+      color: #aaa;
+      padding: 10px 0 4px;
+      flex-shrink: 0;
+    }
+
+    /* ── 모바일 (세로 화면) ── */
+    @media (max-width: 600px) {
+      .layout {
+        flex-direction: column;
+      }
+
+      .sidebar {
+        width: 100%;
+        min-width: unset;
+        height: auto;
+        position: static;
+        padding: 36px 24px 32px;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .sidebar-contact {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 12px 24px;
+      }
+
+      .contact-item {
+        align-items: center;
+      }
+
+      .content {
+        padding: 20px 16px 40px;
+        max-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="layout">
+
+  <!-- ── 왼쪽 사이드바 ── -->
+  <aside class="sidebar">
+    <img class="profile-photo" src="profile.jpg" alt="박준식 프로필 사진" />
+
+    <p class="sidebar-name">박준식</p>
+    <p class="sidebar-position">AI 컨설턴트 &amp; 강사</p>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-contact">
+      <div class="contact-item">
+        <span class="contact-label">Email</span>
+        <span class="contact-value">
+          <a href="mailto:pjs9167@gmail.com">pjs9167@gmail.com</a>
+        </span>
+      </div>
+      <div class="contact-item">
+        <span class="contact-label">Phone</span>
+        <span class="contact-value">010-8904-7310</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ── 오른쪽 본문 ── -->
+  <div class="content">
+
+    <section class="intro">
+      <p>
+        현대자동차 R&amp;D 연구본부에서 34년간 내연기관부터 하이브리드·전기차 구동계까지, 파워트레인 개발의 전 과정을 이끌어왔습니다.<br>
+        앞으로는 그간 쌓아온 경험을 바탕으로 AI 컨설턴트와 강사로 활동하며, 산업 현장에 AI를 접목하는 실질적인 변화를 함께 만들어가고자 합니다.
+      </p>
+    </section>
+
+    <section>
+      <p class="section-label">경력</p>
+      <div class="career-list">
+
+        <div class="career-card">
+          <div class="career-meta">
+            <span class="career-year">2026 – 현재</span>
+            <span class="career-company">AI 컨설턴트 &amp; 강사</span>
+          </div>
+          <div class="career-meta">
+            <span class="career-year" aria-hidden="true" style="visibility:hidden">2026 – 현재</span>
+            <span class="career-company">공공평가 심사위원</span>
+          </div>
+          <p class="career-summary">AI 기술 기업 자문 및 산업 현장 AI 도입 컨설팅, 기업·기관 대상 강의, 공공평가 심사</p>
+        </div>
+
+        <div class="career-card">
+          <div class="career-meta">
+            <span class="career-year">1991 – 2024</span>
+            <span class="career-company">현대자동차</span>
+            <span class="career-title" style="font-weight:700">R&amp;D 연구개발본부 팀장</span>
+          </div>
+          <p class="career-summary">파워트레인 연구개발 전 과정 수행, 34년간 내연기관·하이브리드·전기차 구동계 기술 주도</p>
+        </div>
+
+      </div>
+    </section>
+
+    <section>
+      <p class="section-label">연결하기</p>
+      <div class="contact-buttons">
+        <a class="btn btn-email" href="mailto:pjs9167@gmail.com">이메일 보내기</a>
+        <button class="btn btn-phone" id="phoneBtn" onclick="copyPhone()">전화 걸기</button>
+      </div>
+    </section>
+
+    <footer>박준식 &copy; 2026</footer>
+
+  </div>
+</div>
+
+<script>
+  var PHONE = '010-8904-7310';
+
+  function copyPhone() {
+    var btn = document.getElementById('phoneBtn');
+    navigator.clipboard.writeText(PHONE).then(function () {
+      btn.textContent = '클립보드에 복사되었습니다: ' + PHONE;
+      btn.classList.add('copied');
+      setTimeout(function () {
+        btn.textContent = '전화 걸기 · 번호 복사';
+        btn.classList.remove('copied');
+      }, 2500);
+    }).catch(function () {
+      var el = document.createElement('textarea');
+      el.value = PHONE;
+      el.style.position = 'fixed';
+      el.style.opacity = '0';
+      document.body.appendChild(el);
+      el.select();
+      document.execCommand('copy');
+      document.body.removeChild(el);
+      btn.textContent = '복사 완료: ' + PHONE;
+      btn.classList.add('copied');
+      setTimeout(function () {
+        btn.textContent = '전화 걸기 · 번호 복사';
+        btn.classList.remove('copied');
+      }, 2500);
+    });
+  }
+</script>
+
+</body>
+</html>
